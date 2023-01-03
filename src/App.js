@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { useSelector } from 'react-redux';
+import Container from 'react-bootstrap/Container';
+import SearchBox from './components/searchBox';
+import Teams from './components/table';
 
-function App() {
+const App = () => {
+  const teamsError = useSelector(state => state.teams.error);
+  const gamesError = useSelector(state => state.games.error);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {
+        teamsError || gamesError ? <span className='d-block text-center fs-1 pt-3'>Something went wrong. Please try again</span> : (
+          <Container className='mt-4 app'>
+            <h1 className='nba-teams'>NBA TEAMS</h1>
+            <SearchBox />
+            <Teams />
+          </Container>
+        )
+      }
+    </>
   );
 }
 

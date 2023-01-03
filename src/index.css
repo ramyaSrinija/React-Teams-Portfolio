@@ -1,13 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Roboto', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.app{
+  width: fit-content;
+  padding: 15px;
+}
+
+.nba-teams{
+  color: #074684;
+  margin-bottom: 20px;
+}
+
+ .offcanvas {
+  font-family: 'Roboto', sans-serif;
+}
+
+.table-header{
+  background-color: #074684;
+  color: white;
+}
+
+.background-blue{
+  background-color: #074684;
+}
+
+.table-row {
+  background-color: #F8FBFD;
+}
+
+.background-grey{
+  background-color: #F2F2F2;
+}
+
+.offcanvas-header{
+  background-color: #F2F2F2;
+  padding: 10px !important;
+}
+
+li{
+  margin-bottom: 20px;
+}
+
+.game-details{
+  padding-left: 30px !important;
+}
+
+.input-group {
+  width: 65% !important;
+}
+
+#search {
+  background: none;
+  color: #074684;
+  border: 1.5px solid #074684;
+  border-right: none;
+}
+
+#search-input{
+  border: 1.5px solid #074684;
+  border-left: none;
+}
+
+.sort{
+  font-size: 10px;
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+#search-input:focus{
+  box-shadow: none;
+}
+
+.page-link{
+  background-color: #074684 !important;
+  color: white !important;
+  border: 1px solid white !important;
+}
+
+.page-item{
+  padding-right: 8px !important;
+}
+
+.page-item:last-child{
+  padding-right: 0px !important;
+}
+
+@media screen and (max-width: 500px){
+  .input-group {
+     width: 100% !important;
+  }
 }
