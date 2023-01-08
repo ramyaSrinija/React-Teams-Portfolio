@@ -10,7 +10,7 @@ const App = () => {
   return (
     <>
       {
-        teamsError || gamesError ? <span className='d-block text-center fs-1 pt-3'>Something went wrong. Please try again</span> : (
+        teamsError || gamesError ? <span className='d-block text-center fs-1 pt-3'>{teamsError || gamesError || 'Something Went wrong. Please Try again'}</span> : (
           <Container className='mt-4 app'>
             <h1 className='nba-teams'>NBA TEAMS</h1>
             <SearchBox />

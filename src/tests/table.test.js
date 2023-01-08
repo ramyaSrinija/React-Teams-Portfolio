@@ -29,7 +29,11 @@ const sidePanelMockData = {
     isFetching: false,
     teams: [
       { id: 14, abbreviation: "LAL", city: "Los Angeles", conference: "West", division: "Pacific", full_name: "Los Angeles Lakers", name: "Lakers" },
-      { id: 15, abbreviation: "CLT", city: "Boston", conference: "East", division: "Atlantic", full_name: "Boston Celtics", name: "Celtics" }
+      { id: 15, abbreviation: "CLT", city: "Boston", conference: "East", division: "Atlantic", full_name: "Boston Celtics", name: "Celtics" },
+      { id: 13, abbreviation: "ATL", city: "Atlanta", conference: "East", division: "SouthEast", full_name: "Atlanta Hawks", name: "Hawks" },
+      { id: 12, abbreviation: "BOS", city: "Boston", conference: "East", division: "Atlantic", full_name: "Chicago Bulls", name: "Bulls" },
+      { id: 11, abbreviation: "BKN", city: "Brooklyn", conference: "East", division: "Atlantic", full_name: "Brooklyn Nets", name: "Nets" },
+      { id: 10, abbreviation: "CHA", city: "Charlotte", conference: "East", division: "SouthEast", full_name: "Charlotte Hornets", name: "Hornets" }
     ],
     searchTeams: '',
     showTeamPanel: true,
@@ -77,6 +81,13 @@ const TestTable = () => {
       const rowElement = screen.getAllByText('Celtics')[0];
       fireEvent.click(rowElement);
       expect(screen.getByText('Home Team Score')).toBeInTheDocument();
+    });
+    test('test to check pagination click event', () => {
+      const nextElement = screen.getByTestId('next');
+      fireEvent.click(nextElement);
+
+      const prevElement = screen.getByTestId('prev');
+      fireEvent.click(prevElement);
     });
   });
 };

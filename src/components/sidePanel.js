@@ -43,7 +43,7 @@ const SidePanel = () => {
           <div className='mb-3 fw-bold'>
             Random Game Details:
           </div>
-          <Col className='game-details'>
+          <Col>
             <ul className="list-unstyled fw-bold">
               <li>Date</li>
               <li>Home Team</li>
@@ -52,7 +52,7 @@ const SidePanel = () => {
               <li>Visitor Team Score</li>
             </ul>
           </Col>
-          <Col className='game-details'>
+          <Col>
             <ul className="list-unstyled fw-bold">
               <li>{teamData?.home_team ? date : '-'}</li>
               <li>{teamData?.home_team ? teamData?.home_team?.name : '-'}</li>

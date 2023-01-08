@@ -8,9 +8,14 @@ import SidePanel from './sidePanel';
 
 const Teams = () => {
   const dispatch = useDispatch();
-  const { showTeamPanel, searchTeams, teams, isFetching } = useSelector(state => state.teams)
+  const { showTeamPanel, searchTeams, teams, isFetching, showTeamId } = useSelector(state => state.teams)
   const [teamsData, setTeamData] = useState(teams)
   const [sortIcon, setSortIcon] = useState('asc');
+  const [currentPage, setCurrentPage] = useState(1);
+  const teamsPerPage = 5;
+  const indexOfLastTeam = currentPage * teamsPerPage;
+  const indexOfFirstTeam = indexOfLastTeam - teamsPerPage;
+  const [lastPage, setLastPage] = useState(6);
   const handleShowPanel = (id) => {
     dispatch(toggleShowTeamPanel(id))
   }
@@ -21,13 +26,27 @@ const Teams = () => {
     setTeamData(sortedData)
   }
 
+  const nextPage = () => {
+    if (currentPage !== lastPage) setCurrentPage(currentPage + 1)
+  }
+  const prevPage = () => {
+    if (currentPage !== 1) setCurrentPage(currentPage - 1)
+  }
+
   useEffect(() => {
     dispatch(getTeams());
   }, [])
+
   useEffect(() => {
-    const data = teams.filter(data => data?.name?.toLowerCase()?.includes(searchTeams?.toLowerCase()))
-    setTeamData(data)
-  }, [teams, searchTeams])
+    const data = teams.filter(data => data?.name?.toLowerCase()?.includes(searchTeams?.toLowerCase()));
+    setLastPage(() => Math.ceil(data.length / teamsPerPage));
+    const displayData = data.slice(indexOfFirstTeam, indexOfLastTeam);
+    setTeamData(displayData);
+  }, [teams, searchTeams, currentPage])
+
+  useEffect(() => {
+    if (currentPage > lastPage) setCurrentPage(1);
+  }, [currentPage, lastPage])
 
   return (
     <>
@@ -35,7 +54,7 @@ const Teams = () => {
         isFetching ? <span className='d-block text-center fs-1 pt-3'>Loading...</span> : (
           <div>
             <div className='table-responsive-md'>
-              <Table striped hover className='mt-5 p-2'>
+              <Table hover className='mt-5 p-2'>
                 <thead className='table-header'>
                   <tr>
                     <th>Team Name</th>
@@ -48,7 +67,7 @@ const Teams = () => {
                 <tbody>
                   {
                     teamsData.length > 0 && teamsData.map(row => (
-                      <tr className='table-row' key={row.id} onClick={() => handleShowPanel(row.id)}>
+                      <tr className={showTeamId === row.id ? 'table-row-higlight' : 'table-row'} key={row.id} onClick={() => handleShowPanel(row.id)}>
                         <td>{row.name}</td>
                         <td>{row.city}</td>
                         <td>{row.abbreviation}</td>
@@ -67,9 +86,9 @@ const Teams = () => {
               {
                 teamsData.length > 0 && (
                   <Pagination>
-                    <Pagination.Prev />
-                    <Pagination.Item>{1}</Pagination.Item>
-                    <Pagination.Next />
+                    <Pagination.Prev onClick={prevPage} disabled={currentPage === 1} data-testid="prev" />
+                    <Pagination.Item>{currentPage}</Pagination.Item>
+                    <Pagination.Next onClick={nextPage} disabled={currentPage === lastPage} data-testid="next" />
                   </Pagination>
                 )
               }
